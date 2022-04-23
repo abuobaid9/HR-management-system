@@ -91,7 +91,7 @@ function handleSubmit(event){
     let imag = event.target.imag.value;
     // let personSalary = event.target.personSalary.value;
 
-    let newinfo=new Employee (fname,department,level,imag);
+    let newinfo=new Employee (imag,fname,department,level);
     newinfo.render();
     console.log(newinfo);
 }
