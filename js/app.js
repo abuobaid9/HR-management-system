@@ -56,7 +56,6 @@ sectionEl.appendChild(salarySec);
 
 }
 
-
 let ghazi= new Employee(1,"Ghazi Samer","Administration","senior","./img/Ghazi.jpg",1800);
 let lana= new Employee(1001,"Lana Ali","Finance","senior","./img/Lana.jpg",2000);
 let tamara = new Employee(1002,"Tamara Ayoub","Marketing","senior","./img/Tamara.jpg",1600);
@@ -69,9 +68,13 @@ console.log(allEmployee);
 
 //  ghazi.render();
 
-for (let i = 0; i < allEmployee.length; i++) {
-    allEmployee[i].render();
+function renderAll() {
+    for (let i = 0; i < allEmployee.length; i++) {
+        allEmployee[i].render();
+       
+    }
 }
+renderAll();
 
 form.addEventListener("submit",handleSubmit);
 
@@ -85,13 +88,39 @@ function handleSubmit(event){
     event.preventDefault();
  
     // let pesronID=event.target.pesronID.value;
+    let imag = event.target.imag.value;
     let fname=event.target.fname.value;
     let department=event.target.department.value;
     let level = event.target.level.value;
-    let imag = event.target.imag.value;
     // let personSalary = event.target.personSalary.value;
 
-    let newinfo=new Employee (fname,department,level,imag);
+    let newinfo=new Employee (imag,fname,department,level);
     newinfo.render();
+    saveData(allEmployee);
     console.log(newinfo);
 }
+//local storage
+
+function saveData(data) {
+
+    let stringfiyData = JSON.stringify(data);
+    localStorage.setItem("Employee", stringfiyData);
+}
+
+function getData() {
+    let retrievedData = localStorage.getItem("Employee");
+
+    let arrayData = JSON.parse(retrievedData);
+
+    if (arrayData != null) {
+        for (let i = 0; i < arrayData.length; i++) {
+          
+            new Employee(arrayData[i].name, arrayData[i].depart, arrayData[i].images, arrayData[i].leveles, arrayData[i].salarySec);
+           
+        }
+         localStorage.clear();
+
+    }
+    renderAll();
+}
+getData();
