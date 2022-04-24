@@ -99,6 +99,7 @@ function handleSubmit(event){
     saveData(allEmployee);
     console.log(newinfo);
 }
+s
 //local storage
 
 function saveData(data) {
@@ -124,3 +125,5 @@ function getData() {
     renderAll();
 }
 getData();
+
+
